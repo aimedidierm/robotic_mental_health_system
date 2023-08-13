@@ -28,13 +28,19 @@ Route::post('/sign-up', [UserController::class, 'store']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::group(["prefix" => "patient", "middleware" => ["auth", "isPatient"], "as" => "patient."], function () {
-    Route::view('/', 'welcome');
+    Route::view('/', 'patient.chat');
+    Route::view('/schedules', 'patient.schedules');
+    Route::view('/settings', 'patient.settings');
 });
 
 Route::group(["prefix" => "doctor", "middleware" => ["auth", "isDoctor"], "as" => "doctor."], function () {
-    Route::view('/', 'welcome');
+    Route::view('/', 'doctor.schedules');
+    Route::view('/chat', 'doctor.chat');
+    Route::view('/settings', 'doctor.settings');
 });
 
 Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => "admin."], function () {
-    Route::view('/', 'welcome');
+    Route::view('/', 'admin.admins');
+    Route::view('/doctors', 'admin.doctors');
+    Route::view('/settings', 'admin.settings');
 });
