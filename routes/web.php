@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::view('/test', 'layout');
+
+Route::view('/', 'index')->name('login');
+Route::post('/', [AuthController::class, 'login']);
+Route::view('/sign-up', 'sign-up');
+Route::post('/sign-up', [UserController::class, 'store']);
+Route::get('/logout', [AuthController::class, 'logout']);
+
+Route::group(["prefix" => "patient", "middleware" => ["auth", "isPatient"], "as" => "patient."], function () {
+    Route::view('/', 'welcome');
+});
+
+Route::group(["prefix" => "doctor", "middleware" => ["auth", "isDoctor"], "as" => "doctor."], function () {
+    Route::view('/', 'welcome');
+});
+
+Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => "admin."], function () {
+    Route::view('/', 'welcome');
 });
