@@ -6,15 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $admins = User::latest()->where('role', 'admin')->get();
-        return view('admin.admins', ['admins' => $admins]);
+        //
     }
 
     /**
@@ -30,25 +29,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'name' => 'required|string',
-                'email' => 'required|email|string|unique:users,email',
-                'phone' => 'required|numeric|regex:/^07\d{8}$/',
-            ],
-            $messages = [
-                'phone.regex' => 'The phone number must start with "07" and be 10 digits long.',
-            ]
-        );
-
-        $admin = new User;
-        $admin->name = $request->name;
-        $admin->email = $request->email;
-        $admin->phone = $request->phone;
-        $admin->role = 'admin';
-        $admin->password = bcrypt('password');
-        $admin->save();
-        return redirect('/admin');
+        //
     }
 
     /**
@@ -85,14 +66,14 @@ class AdminController extends Controller
         );
 
         if ($request->password == $request->password_confirmation) {
-            $admin = User::find(Auth::id());
-            $admin->name = $request->name;
-            $admin->phone = $request->phone;
-            $admin->password = bcrypt($request->password);
-            $admin->update();
-            return redirect('/admin/settings');
+            $patient = User::find(Auth::id());
+            $patient->name = $request->name;
+            $patient->phone = $request->phone;
+            $patient->password = bcrypt($request->password);
+            $patient->update();
+            return redirect('/patient/settings');
         } else {
-            return redirect('/admin/settings')->withErrors('Passwords not match');
+            return redirect('/patient/settings')->withErrors('Passwords not match');
         }
     }
 
@@ -101,12 +82,6 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        $admin = User::find($id);
-        if ($admin != null) {
-            $admin->delete();
-            return redirect('/admin');
-        } else {
-            return redirect('/admin')->withErrors('Admin account not found');
-        }
+        //
     }
 }

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,13 +27,15 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::group(["prefix" => "patient", "middleware" => ["auth", "isPatient"], "as" => "patient."], function () {
     Route::view('/', 'patient.chat');
-    Route::view('/schedules', 'patient.schedules');
+    Route::get('/schedules', [ScheduleController::class, 'index']);
     Route::view('/settings', 'patient.settings');
+    Route::post('/settings', [PatientController::class, 'update']);
 });
 
 Route::group(["prefix" => "doctor", "middleware" => ["auth", "isDoctor"], "as" => "doctor."], function () {
-    Route::view('/', 'doctor.schedules');
+    Route::get('/', [ScheduleController::class, 'index']);
     Route::view('/settings', 'doctor.settings');
+    Route::post('/settings', [DoctorController::class, 'update']);
 });
 
 Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => "admin."], function () {

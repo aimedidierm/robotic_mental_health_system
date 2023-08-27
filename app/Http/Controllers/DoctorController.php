@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
@@ -69,9 +70,30 @@ class DoctorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|string',
+                'password' => 'required|string',
+                'password_confirmation' => 'required|string',
+                'phone' => 'required|numeric|regex:/^07\d{8}$/',
+            ],
+            $messages = [
+                'phone.regex' => 'The phone number must start with "07" and be 10 digits long.',
+            ]
+        );
+
+        if ($request->password == $request->password_confirmation) {
+            $doctor = User::find(Auth::id());
+            $doctor->name = $request->name;
+            $doctor->phone = $request->phone;
+            $doctor->password = bcrypt($request->password);
+            $doctor->update();
+            return redirect('/doctor/settings');
+        } else {
+            return redirect('/doctor/settings')->withErrors('Passwords not match');
+        }
     }
 
     /**

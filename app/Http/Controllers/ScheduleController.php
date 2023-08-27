@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
@@ -12,7 +13,15 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->role == 'doctor') {
+            $data = Schedule::where('doctor_id', Auth::id())->get();
+            $data->load('patient');
+            return view('doctor.schedules', ['schedules' => $data]);
+        } else if (Auth::user()->role == 'patient') {
+            $data = Schedule::where('user_id', Auth::id())->get();
+            $data->load('doctor');
+            return view('patient.schedules', ['schedules' => $data]);
+        }
     }
 
     /**
