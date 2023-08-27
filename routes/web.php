@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +16,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::view('/test', 'layout');
 
 Route::view('/', 'index')->name('login');
 Route::post('/', [AuthController::class, 'login']);
@@ -35,12 +31,14 @@ Route::group(["prefix" => "patient", "middleware" => ["auth", "isPatient"], "as"
 
 Route::group(["prefix" => "doctor", "middleware" => ["auth", "isDoctor"], "as" => "doctor."], function () {
     Route::view('/', 'doctor.schedules');
-    Route::view('/chat', 'doctor.chat');
     Route::view('/settings', 'doctor.settings');
 });
 
 Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => "admin."], function () {
-    Route::view('/', 'admin.admins');
-    Route::view('/doctors', 'admin.doctors');
+    Route::resource('/', AdminController::class)->only('index', 'store');
+    Route::get('/admins/{id}', [AdminController::class, 'destroy']);
+    Route::resource('/doctors', DoctorController::class)->only('index', 'store');
+    Route::get('/doctors/{id}', [DoctorController::class, 'destroy']);
     Route::view('/settings', 'admin.settings');
+    Route::post('/settings', [AdminController::class, 'update']);
 });
