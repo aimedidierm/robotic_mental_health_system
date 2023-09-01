@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +31,9 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        //
+        $data = Service::get();
+        $total = Service::get()->count();
+        return view('patient.chat', ['services' => $data, 'totalServices' => $total]);
     }
 
     /**
@@ -37,7 +41,21 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'availabilityTime' => 'required|date',
+            'serviceChoice' => 'required|numeric',
+            'shortDescription' => 'required|string',
+        ]);
+
+        $selectedService = Service::where('id', $request->serviceChoice)->first();
+        $doctorId = User::where('role', 'doctor')->inRandomOrder()->first();
+        $schedule = new Schedule;
+        $schedule->title = $selectedService->title;
+        $schedule->user_id = Auth::id();
+        $schedule->doctor_id = $doctorId->id;
+        $schedule->date = $request->availabilityTime;
+        $schedule->comment = $request->shortDescription;
+        $schedule->save();
     }
 
     /**

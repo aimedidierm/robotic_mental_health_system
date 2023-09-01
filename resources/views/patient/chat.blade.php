@@ -2,119 +2,187 @@
 
 @section('content')
 <x-patient-navbar />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="pt-16 container mx-auto">
-    <div class="min-w-full h-screen lg:grid lg:grid-cols-3 dark:bg-gray-800">
+    <div class="min-w-full lg:grid dark:bg-gray-800">
         <div class="border-r border-gray-300 lg:col-span-1 dark:border-gray-700">
-            <div class="mx-3 my-3">
-                <div class="relative text-gray-600">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6 text-gray-300">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </span>
-                    <input type="search" class="block w-full py-2 pl-10 bg-gray-100 rounded outline-none" name="search"
-                        placeholder="Search" required />
-                </div>
-            </div>
-
-            <ul class="overflow-auto h-[32rem]">
-                <h2 class="my-2 mb-2 ml-2 text-lg text-gray-600 dark:text-white">Chats</h2>
-                <li>
-                    <a
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-green-200 dark:hover:bg-green-950 focus:outline-none">
-                        <img class="object-cover w-10 h-10 rounded-full" src="/user.png" alt="username" />
-                        <div class="w-full pb-2">
-                            <div class="flex justify-between">
-                                <span class="block ml-2 font-semibold text-gray-600 dark:text-white">Jhon Don</span>
-                                <span class="block ml-2 text-sm text-gray-600 dark:text-white">25 minutes</span>
-                            </div>
-                            <span class="block ml-2 text-sm text-gray-600 dark:text-white">bye</span>
+            <div class="hidden lg:col-span-2 lg:block dark:border-gray-700">
+                <div class="w-full">
+                    <div class="relative flex items-center p-3 border-b border-gray-300">
+                        <img class="object-cover w-10 h-10 rounded-full" src="/user.png" alt="RMHS Bot" />
+                        <span class="block ml-2 font-bold text-gray-600">RMHS Bot</span>
+                        <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
+                        </span>
+                    </div>
+                    <div class="relative w-full p-6 overflow-y-auto h-[40rem]">
+                        <div class="min-w-full h-screen lg:grid dark:bg-gray-800">
+                            <ul class="space-y-2 chat-container">
+                                <li class="flex justify-start">
+                                    <div
+                                        class="relative max-w-xl px-4 py-2 text-gray-700 dark:bg-green-950 bg-green-200 dark:text-white rounded shadow">
+                                        <span class="block">Hello can I know the kind of service do you need
+                                            bettween: <br>
+                                            @foreach ($services as $service)
+                                            {{$service->id}}{{'. '}}{{$service->title}} <br>
+                                            @endforeach
+                                            You can replay with the number of your choice, thank you.</span>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                    </a>
-                    <a
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out dark:bg-green-950 bg-green-200 border-b border-gray-300 cursor-pointer focus:outline-none">
-                        <img class="object-cover w-10 h-10 rounded-full" src="/user.png" alt="username" />
-                        <div class="w-full pb-2">
-                            <div class="flex justify-between">
-                                <span class="block ml-2 font-semibold text-gray-600 dark:text-white">Same</span>
-                                <span class="block ml-2 text-sm text-gray-600 dark:text-white">50 minutes</span>
-                            </div>
-                            <span class="block ml-2 text-sm text-gray-600 dark:text-white">Good night</span>
-                        </div>
-                    </a>
-                    <a
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-green-200 dark:hover:bg-green-950  focus:outline-none">
-                        <img class="object-cover w-10 h-10 rounded-full" src="/user.png" alt="username" />
-                        <div class="w-full pb-2">
-                            <div class="flex justify-between">
-                                <span class="block ml-2 font-semibold text-gray-600 dark:text-white">Emma</span>
-                                <span class="block ml-2 text-sm text-gray-600 dark:text-white">6 hour</span>
-                            </div>
-                            <span class="block ml-2 text-sm text-gray-600 dark:text-white">Good Morning</span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="hidden lg:col-span-2 lg:block dark:border-gray-700">
-            <div class="w-full">
-                <div class="relative flex items-center p-3 border-b border-gray-300">
-                    <img class="object-cover w-10 h-10 rounded-full" src="/user.png" alt="username" />
-                    <span class="block ml-2 font-bold text-gray-600">Emma</span>
-                    <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
-                    </span>
-                </div>
-                <div class="relative w-full p-6 overflow-y-auto h-[40rem]">
-                    <ul class="space-y-2">
-                        <li class="flex justify-start">
-                            <div
-                                class="relative max-w-xl px-4 py-2 text-gray-700 dark:bg-green-950 bg-green-200 dark:text-white rounded shadow">
-                                <span class="block">Hi</span>
-                            </div>
-                        </li>
-                        <li class="flex justify-end">
-                            <div class="relative max-w-xl px-4 py-2 text-gray-700  bg-gray-100 rounded shadow">
-                                <span class="block">Hiiii</span>
-                            </div>
-                        </li>
-                        <li class="flex justify-end">
-                            <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                                <span class="block">how are you?</span>
-                            </div>
-                        </li>
-                        <li class="flex justify-start">
-                            <div
-                                class="relative max-w-xl px-4 py-2 text-gray-700 dark:bg-green-950 bg-green-200 dark:text-white rounded shadow">
-                                <span class="block">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="flex items-center justify-between w-full p-3 border-t border-gray-300">
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                        </svg>
-                    </button>
-
-                    <input type="text" placeholder="Message"
-                        class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
-                        name="message" required />
-                    <button type="submit">
-                        <svg class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path
-                                d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                        </svg>
-                    </button>
+                    </div>
+                    <div class="flex items-center justify-between w-full p-3 border-t border-gray-300">
+                        <input id="message-input" type="text" placeholder="Enter your message..."
+                            class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
+                            required />
+                        <button id="send-button">
+                            <svg class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    const chatContainer = document.querySelector('.chat-container');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+
+    let step = 1;
+
+    sendButton.addEventListener('click', () => {
+        const message = messageInput.value.trim();
+
+        if (message !== '') {
+            const sentMessageContainer = document.createElement('li');
+            sentMessageContainer.className = 'flex justify-end';
+            sentMessageContainer.innerHTML = `
+                <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                    <span class="block">${message}</span>
+                </div>
+            `;
+
+            chatContainer.appendChild(sentMessageContainer);
+
+            messageInput.value = '';
+
+            setTimeout(() => {
+                handleBotResponse(message);
+            }, 1000);
+        }
+    });
+    const totalServices = {!! json_encode($totalServices) !!};
+    function isValidServiceChoice(input) {
+        const choice = parseInt(input);
+        return !isNaN(choice) && choice >= 1 && choice <= totalServices;
+    }
+
+    function handleBotResponse(userMessage) {
+    const receivedMessageContainer = document.createElement('li');
+    receivedMessageContainer.className = 'flex justify-start';
+    let botResponse = '';
+
+    switch (step) {
+        case 1:
+            if (isValidServiceChoice(userMessage)) {
+                sessionStorage.setItem('serviceChoice', userMessage);
+
+                botResponse = `
+                    <div class="relative max-w-xl px-4 py-2 text-gray-700 dark:bg-green-950 bg-green-200 dark:text-white rounded shadow">
+                        <span class="block">Great! Please provide a short description about the service you need.</span>
+                    </div>
+                `;
+                step++;
+            } else {
+                botResponse = `
+                    <div class="relative max-w-xl px-4 py-2 text-gray-700 dark:bg-green-950 bg-green-200 dark:text-white rounded shadow">
+                        <span class="block">Invalid input. Please enter a valid service number.</span>
+                    </div>
+                `;
+            }
+            break;
+
+        case 2:
+            sessionStorage.setItem('shortDescription', userMessage);
+
+            botResponse = `
+                <div class="relative max-w-xl px-4 py-2 text-gray-700 dark:bg-green-950 bg-green-200 dark:text-white rounded shadow">
+                    <span class="block">Thank you! Could you please let us know your availability date? (YYYY-MM-DD)</span>
+                </div>
+            `;
+            step++;
+            break;
+
+            case 3:
+    const availabilityTime = userMessage.trim();
+
+    if (isValidDate(availabilityTime)) {
+        sessionStorage.setItem('availabilityTime', availabilityTime);
+
+        const serviceChoice = sessionStorage.getItem('serviceChoice');
+        const shortDescription = sessionStorage.getItem('shortDescription');
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        const postData = {
+            serviceChoice,
+            shortDescription,
+            availabilityTime
+        };
+
+        console.log(postData);
+
+        fetch('http://localhost:8000/patient/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: JSON.stringify(postData)
+        })
+        .then(response => response.json())
+        .then(data => {
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+        botResponse = `
+            <div class="relative max-w-xl px-4 py-2 text-gray-700 dark:bg-green-950 bg-green-200 dark:text-white rounded shadow">
+                
+<span class="block">Thank you for providing the information. We will contact you shortly. and you can find your schedule
+    <a href="/patient/schedules"><b class="text-red-700">Here</b></a></span>
+            </div>`;
+        step++;
+    } else {
+        botResponse = `
+            <div class="relative max-w-xl px-4 py-2 text-gray-700 dark:bg-green-950 bg-green-200 dark:text-white rounded shadow">
+                <span class="block">Invalid date format. Please enter a valid date (YYYY-MM-DD).</span>
+            </div>`;
+    }
+    break;
+    }
+    function isValidDate(dateString) {
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!regex.test(dateString)) {
+        return false;
+    }
+
+    const parts = dateString.split('-');
+    const year = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10);
+    const day = parseInt(parts[2], 10);
+
+    return year >= 1000 && year <= 9999 && month >= 1 && month <= 12 && day >= 1 && day <= 31;
+}
+
+    receivedMessageContainer.innerHTML = botResponse;
+    chatContainer.appendChild(receivedMessageContainer);
+}
+</script>
 @stop

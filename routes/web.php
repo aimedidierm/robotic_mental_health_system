@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,8 +27,11 @@ Route::post('/sign-up', [UserController::class, 'store']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::group(["prefix" => "patient", "middleware" => ["auth", "isPatient"], "as" => "patient."], function () {
-    Route::view('/', 'patient.chat');
+    Route::get('/', [ScheduleController::class, 'create']);
+    Route::post('/chat', [ScheduleController::class, 'store']);
     Route::get('/schedules', [ScheduleController::class, 'index']);
+    Route::resource('/testimonies', TestimonialController::class)->only('index', 'store', 'destory');
+    Route::get('/testimonies/{testimonial}', [TestimonialController::class, 'destroy']);
     Route::view('/settings', 'patient.settings');
     Route::post('/settings', [PatientController::class, 'update']);
 });
@@ -35,6 +39,8 @@ Route::group(["prefix" => "patient", "middleware" => ["auth", "isPatient"], "as"
 Route::group(["prefix" => "doctor", "middleware" => ["auth", "isDoctor"], "as" => "doctor."], function () {
     Route::get('/', [ScheduleController::class, 'index']);
     Route::view('/settings', 'doctor.settings');
+    Route::resource('/testimonies', TestimonialController::class)->only('index', 'store', 'destory');
+    Route::get('/testimonies/{testimonial}', [TestimonialController::class, 'destroy']);
     Route::post('/settings', [DoctorController::class, 'update']);
 });
 

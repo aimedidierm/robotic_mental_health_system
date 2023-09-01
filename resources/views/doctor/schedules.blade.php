@@ -14,6 +14,9 @@
                     Title
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Summary
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Patient
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -24,7 +27,7 @@
         <tbody>
             @if ($schedules->isEmpty())
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" colspan="4"
+                <th scope="row" colspan="5"
                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     No available schedule
                 </th>
@@ -37,6 +40,9 @@
                 </th>
                 <td class="px-6 py-4">
                     {{$schedule->title}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$schedule->comment}}
                 </td>
                 <td class="px-6 py-4">
                     {{$schedule->patient->name}}
