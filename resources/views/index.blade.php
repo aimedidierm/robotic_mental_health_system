@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Robotic mental health system</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
     <style>
         .neumorphism {
@@ -21,6 +21,18 @@
 </head>
 
 <body>
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <div class="text-white text-2xl font-bold">Robotic mental health system</div>
+                <ul class="flex space-x-4">
+                    <li><a href="/" class="text-white">Home</a></li>
+                    <li><a href="/login" class="text-white">Login</a></li>
+                    <li><a href="/sign-up" class="text-white">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
