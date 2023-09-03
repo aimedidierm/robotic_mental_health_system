@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BotSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,10 +13,10 @@ class BotSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::factory()->create([
-            'name' => 'System Bot',
-            'email' => 'bot@example.com',
+            'name' => 'Default Admin',
+            'email' => 'test@example.com',
             'phone' => '0788750979',
-            'role' => 'bot',
+            'role' => 'admin',
             'password' => bcrypt('0788750979'),
         ]);
     }

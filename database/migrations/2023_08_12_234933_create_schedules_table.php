@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id')->onDelete("restrict");
+            $table->foreign('user_id')->on('users')->references('id')->onDelete("CASCADE");
             $table->unsignedBigInteger('doctor_id');
-            $table->foreign('doctor_id')->on('users')->references('id')->onDelete("restrict");
+            $table->foreign('doctor_id')->on('users')->references('id')->onDelete("CASCADE");
             $table->dateTime('date');
             $table->timestamps();
         });

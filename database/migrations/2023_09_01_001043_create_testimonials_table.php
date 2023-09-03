@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('comment');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id')->onDelete("restrict");
+            $table->foreign('user_id')->on('users')->references('id')->onDelete("CASCADE");
             $table->timestamps();
         });
     }
