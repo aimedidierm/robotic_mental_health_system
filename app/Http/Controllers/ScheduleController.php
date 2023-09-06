@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ScheduleController extends Controller
 {
@@ -88,5 +89,13 @@ class ScheduleController extends Controller
     public function destroy(Schedule $schedule)
     {
         //
+    }
+
+    public function report()
+    {
+        $data = Schedule::where('doctor_id', Auth::id())->get();
+        $data->load('patient');
+        $pdf = Pdf::loadView('doctor.report', ['data' => $data]);
+        return $pdf->download('report.pdf');
     }
 }
