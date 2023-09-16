@@ -78,7 +78,7 @@
                 <ul class="space-y-2 font-medium">
                     <li>
                         <a href="/doctor"
-                            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 calendar_month
                             </span>
@@ -87,7 +87,7 @@
                     </li>
                     <li>
                         <a href="/chat"
-                            class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2 rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 chat
                             </span>
@@ -96,7 +96,7 @@
                     </li>
                     <li>
                         <a href="/doctor/testimonies"
-                            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 add_comment
                             </span>
@@ -105,7 +105,7 @@
                     </li>
                     <li>
                         <a href="/doctor/settings"
-                            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 settings
                             </span>
@@ -114,7 +114,7 @@
                     </li>
                     <li>
                         <a href="/logout"
-                            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 logout
                             </span>

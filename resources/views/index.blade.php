@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Robotic mental health system</title>
+    <title>{{env('APP_NAME')}}</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
     <style>
         .neumorphism {
@@ -24,7 +24,7 @@
     <nav class="bg-blue-500 p-4">
         <div class="container mx-auto">
             <div class="flex justify-between items-center">
-                <div class="text-white text-2xl font-bold">Robotic mental health system</div>
+                <div class="text-white text-2xl font-bold">{{env('APP_NAME')}}</div>
                 <ul class="flex space-x-4">
                     <li><a href="/" class="text-white">Home</a></li>
                     <li><a href="/login" class="text-white">Login</a></li>
@@ -36,7 +36,7 @@
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                Robotic Mental Health System
+                {{env('APP_NAME')}}
             </a>
             <div
                 class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 neumorphism">

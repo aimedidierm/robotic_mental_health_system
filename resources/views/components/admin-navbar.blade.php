@@ -78,7 +78,7 @@
                 <ul class="space-y-2 font-medium">
                     <li>
                         <a href="/admin"
-                            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 groups
                             </span>
@@ -87,7 +87,7 @@
                     </li>
                     <li>
                         <a href="/admin/doctors"
-                            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 psychology
                             </span>
@@ -96,7 +96,7 @@
                     </li>
                     <li>
                         <a href="/admin/settings"
-                            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 settings
                             </span>
@@ -105,7 +105,7 @@
                     </li>
                     <li>
                         <a href="/logout"
-                            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 logout
                             </span>

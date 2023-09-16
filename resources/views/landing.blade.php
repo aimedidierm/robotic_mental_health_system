@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Robotic mental health system</title>
+    <title>{{env('APP_NAME')}}</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
 
 </head>
@@ -17,6 +17,7 @@
                 <div class="text-white text-2xl font-bold">Robotic mental health system</div>
                 <ul class="flex space-x-4">
                     <li><a href="/" class="text-white">Home</a></li>
+                    <li><a href="/#about" class="text-white">About Us</a></li>
                     <li><a href="/login" class="text-white">Login</a></li>
                     <li><a href="/sign-up" class="text-white">Sign Up</a></li>
                 </ul>
@@ -43,6 +44,22 @@
             </div>
         </div>
     </div>
+    <section id="about" class="py-16">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-8">About Us</h2>
+            <p class="text-gray-700 text-lg">
+                Welcome to {{env('APP_NAME')}} – Your Path to Mental Wellness.
+
+                At {{env('APP_NAME')}}, we understand that taking care of your mental health is paramount.
+                We're here to make the journey to mental wellness as accessible and seamless as possible.
+
+                Our mission is simple: to connect you with experienced and compassionate mental health professionals who
+                can provide the support you need. Whether you're navigating stress, anxiety, depression, or seeking
+                personal growth and self-discovery, we're here to help you find the right expert who can guide you on
+                your path to well-being.
+            </p>
+        </div>
+    </section>
 </body>
 
 </html>

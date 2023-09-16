@@ -37,38 +37,35 @@
     <div class="container mx-auto p-4">
         <h2 class="text-2xl font-semibold mb-4">List of all schedules</h2>
 
-        <table class="w-full table-auto border border-collapse">
+        <table style="width: 100%" class="w-full table-auto border border-collapse">
             <thead>
                 <tr>
-                    <th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Date
                     </th>
-                    <th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Title
                     </th>
-                    <th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Patient
-                    </th>
-                    <th>
-                        Action
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @if ($data->isEmpty())
-                <tr>
+                <tr style="padding: 8px; border: 1px solid #0c0c0c;">
                     <td class="px-4 py-2 border" colspan="5">No available data</td>
                 </tr>
                 @else
                 @foreach ($data as $schedule)
                 <tr>
-                    <th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->date}}
                     </th>
-                    <td>
+                    <td style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->title}}
                     </td>
-                    <td>
+                    <td style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->patient->name}}
                     </td>
                 </tr>
