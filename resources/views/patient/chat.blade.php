@@ -1,6 +1,29 @@
 @extends('layout')
 
 @section('content')
+<style>
+    .scrolling-text {
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .scrolling-text p {
+        animation: scrollText 10s linear infinite;
+        transform-origin: left;
+        animation-play-state: running;
+        width: 100%;
+    }
+
+    @keyframes scrollText {
+        0% {
+            transform: translateX(100%);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+</style>
 <x-patient-navbar />
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="sm:ml-64">
@@ -9,11 +32,25 @@
             <div class="border-r border-gray-300 lg:col-span-1 dark:border-gray-700">
                 <div class="hidden lg:col-span-2 lg:block dark:border-gray-700">
                     <div class="w-full">
-                        <div class="relative flex items-center p-3 border-b border-gray-300">
-                            <img class="object-cover w-10 h-10 rounded-full" src="/user.png" alt="RMHS Bot" />
-                            <span class="block ml-2 font-bold text-gray-600">RMHS Bot</span>
-                            <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
-                            </span>
+                        <div class="w-full">
+                            <div class="relative flex items-center p-3 border-b border-gray-300">
+                                <div>
+                                    <img class="object-cover w-10 h-10 rounded-full" src="/user.png" alt="RMHS Bot" />
+                                    <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3"></span>
+                                </div>
+                                <span class="block ml-2 font-bold text-gray-600">RMHS Bot</span>
+                                <div class="px-80 scrolling-text">
+                                    <div class="justify-end w-96">
+                                        <p>
+                                            I choose to let go of negative thoughts and embrace positivity,
+                                            I am worthy of love, respect, and compassion,
+                                            My mental health is a priority, and I choose to take care of myself,
+                                            I am capable of handling any challenge that comes my way,
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="relative w-full p-6 overflow-y-auto h-[30rem]">
                             <div class="min-w-full h-screen lg:grid dark:bg-gray-800">
