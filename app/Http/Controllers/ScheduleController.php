@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Models\Schedule;
 use App\Models\Service;
 use App\Models\User;
@@ -17,11 +18,11 @@ class ScheduleController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'doctor') {
-            $data = Schedule::where('doctor_id', Auth::id())->get();
+            $data = Schedule::where('doctor_id', Auth::id())->where('payment', true)->get();
             $data->load('patient');
             return view('doctor.schedules', ['schedules' => $data]);
         } else if (Auth::user()->role == 'patient') {
-            $data = Schedule::where('user_id', Auth::id())->get();
+            $data = Schedule::where('user_id', Auth::id())->where('payment', true)->get();
             $data->load('doctor');
             return view('patient.schedules', ['schedules' => $data]);
         }
@@ -57,6 +58,11 @@ class ScheduleController extends Controller
         $schedule->date = $request->availabilityTime;
         $schedule->comment = $request->shortDescription;
         $schedule->save();
+        $payment = new Payment;
+        $payment->amount = 400;
+        $payment->schedule_id = $schedule->id;
+        $payment->user_id = Auth::id();
+        $payment->save();
     }
 
     /**

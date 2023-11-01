@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UserController;
@@ -35,6 +36,8 @@ Route::group(["prefix" => "patient", "middleware" => ["auth", "isPatient"], "as"
     Route::get('/testimonies/{testimonial}', [TestimonialController::class, 'destroy']);
     Route::view('/settings', 'patient.settings');
     Route::post('/settings', [PatientController::class, 'update']);
+    Route::get('/payments', [PaymentController::class, 'patientList']);
+    Route::post('/payments', [PaymentController::class, 'update']);
 });
 
 Route::group(["prefix" => "doctor", "middleware" => ["auth", "isDoctor"], "as" => "doctor."], function () {
@@ -53,4 +56,5 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => 
     Route::get('/doctors/{id}', [DoctorController::class, 'destroy']);
     Route::view('/settings', 'admin.settings');
     Route::post('/settings', [AdminController::class, 'update']);
+    Route::get('/payments', [PaymentController::class, 'index']);
 });

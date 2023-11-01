@@ -104,6 +104,15 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/patient/payments"
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <span class="material-symbols-outlined">
+                                payments
+                            </span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Payments</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/patient/settings"
                             class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
