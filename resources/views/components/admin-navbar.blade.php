@@ -95,21 +95,21 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/doctors"
+                        <a href="/admin/payments"
                             class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 payments
                             </span>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Doctors</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Payments</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/payments"
+                        <a href="/admin/settings"
                             class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">
                                 settings
                             </span>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Payments</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Settings</span>
                         </a>
                     </li>
                     <li>
