@@ -85,9 +85,9 @@ class PaymentController extends Controller
                 "amount" => $payment->amount,
                 "phone" => $request->phone,
             ]);
-            return redirect('/amployee/payments');
+            return redirect('/patient/payments');
         } else {
-            return redirect('/employee/payments')->withErrors('Payment not found');
+            return redirect('/patient/payments')->withErrors('Payment not found');
         }
     }
 
