@@ -159,17 +159,22 @@
 
             botResponse = `
                 <div class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
-                    <span class="block">Thank you! Could you please let us know your availability date? (YYYY-MM-DD)</span>
+                    <span class="block">You can select a doctor from the following:<br>
+                    @foreach ($doctors as $doctor)
+                    {{$doctor->id}}{{'. '}}{{$doctor->name}} <br>
+                    @endforeach
+                    You can replay with the number of your choice.
+                    </span>
                 </div>
             `;
             step++;
             break;
 
             case 3:
-    const availabilityTime = userMessage.trim();
+    const availlableDoctor = userMessage.trim();
 
-    if (isValidDate(availabilityTime)) {
-        sessionStorage.setItem('availabilityTime', availabilityTime);
+    if (availlableDoctor) {
+        sessionStorage.setItem('availlableDoctor', availlableDoctor);
 
         const serviceChoice = sessionStorage.getItem('serviceChoice');
         const shortDescription = sessionStorage.getItem('shortDescription');
@@ -179,7 +184,7 @@
         const postData = {
             serviceChoice,
             shortDescription,
-            availabilityTime
+            availlableDoctor
         };
 
         console.log(postData);
@@ -214,19 +219,6 @@
     }
     break;
     }
-    function isValidDate(dateString) {
-    const regex = /^\d{4}-\d{2}-\d{2}$/;
-    if (!regex.test(dateString)) {
-        return false;
-    }
-
-    const parts = dateString.split('-');
-    const year = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10);
-    const day = parseInt(parts[2], 10);
-
-    return year >= 1000 && year <= 9999 && month >= 1 && month <= 12 && day >= 1 && day <= 31;
-}
 
     receivedMessageContainer.innerHTML = botResponse;
     chatContainer.appendChild(receivedMessageContainer);

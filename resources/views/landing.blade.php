@@ -28,7 +28,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Image Section -->
             <div>
-                <img src="landing-robot.png" alt="Landing Image" class="w-full h-auto rounded-lg shadow-lg">
+                <img src="doctor.jpg" alt="Landing Image" class="w-full h-auto rounded-lg shadow-lg">
             </div>
 
             <!-- Text Section -->

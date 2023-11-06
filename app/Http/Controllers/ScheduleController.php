@@ -35,7 +35,8 @@ class ScheduleController extends Controller
     {
         $data = Service::get();
         $total = Service::get()->count();
-        return view('patient.chat', ['services' => $data, 'totalServices' => $total]);
+        $doctors = User::where('role', 'doctor')->where('available', true)->get();
+        return view('patient.chat', ['services' => $data, 'totalServices' => $total, 'doctors' => $doctors]);
     }
 
     /**
@@ -43,26 +44,31 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         $request->validate([
-            'availabilityTime' => 'required|date',
+            'availlableDoctor' => 'required',
             'serviceChoice' => 'required|numeric',
             'shortDescription' => 'required|string',
         ]);
 
         $selectedService = Service::where('id', $request->serviceChoice)->first();
-        $doctorId = User::where('role', 'doctor')->inRandomOrder()->first();
-        $schedule = new Schedule;
-        $schedule->title = $selectedService->title;
-        $schedule->user_id = Auth::id();
-        $schedule->doctor_id = $doctorId->id;
-        $schedule->date = $request->availabilityTime;
-        $schedule->comment = $request->shortDescription;
-        $schedule->save();
-        $payment = new Payment;
-        $payment->amount = 400;
-        $payment->schedule_id = $schedule->id;
-        $payment->user_id = Auth::id();
-        $payment->save();
+        $doctor = User::find($request->availlableDoctor);
+        if ($doctor) {
+            $schedule = new Schedule;
+            $schedule->title = $selectedService->title;
+            $schedule->user_id = Auth::id();
+            $schedule->doctor_id = $doctor->id;
+            $schedule->date = now();
+            $schedule->comment = $request->shortDescription;
+            $schedule->save();
+            $payment = new Payment;
+            $payment->amount = 400;
+            $payment->schedule_id = $schedule->id;
+            $payment->user_id = Auth::id();
+            $payment->save();
+        } else {
+            # code...
+        }
     }
 
     /**
