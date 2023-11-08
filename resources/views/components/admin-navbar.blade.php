@@ -71,9 +71,10 @@
         <aside id="default-sidebar"
             class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar">
-            <div class="h-full px-3 py-4 overflow-y-auto text-white bg-blue-950 dark:bg-gray-800">
+            <div class="h-full px-3 py-4 overflow-y-auto text-white bg-green-950 dark:bg-gray-800">
                 <a href="/admin" class="flex items-center pl-2.5 mb-5">
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">RMHS </span>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">RMHS -
+                        Admin</span>
                 </a>
                 <ul class="space-y-2 font-medium">
                     <li>
