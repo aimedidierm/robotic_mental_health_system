@@ -50,6 +50,12 @@
                         Patient
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
+                        Patient Age
+                    </th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
+                        Patient Status
+                    </th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Doctor
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
@@ -75,10 +81,16 @@
                         {{$schedule->patient->name}}
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
+                        {{$schedule->patient->age}}
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #0c0c0c;">
+                        {{$schedule->patient->m_status}}
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->doctor->name}}
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$schedule->payments->amount}} Rwf
+                        {{$schedule->payments->amount ?? ''}} Rwf
                     </td>
                 </tr>
                 @endforeach

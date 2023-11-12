@@ -44,7 +44,6 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
         $request->validate([
             'availlableDoctor' => 'required',
             'serviceChoice' => 'required|numeric',
@@ -109,7 +108,6 @@ class ScheduleController extends Controller
             $data = Schedule::get();
             $data->load('patient', 'doctor', 'payments');
             $income = Payment::sum('amount');
-            // return view('admin.report', ['data' => $data, 'income' => $income]);
             $pdf = Pdf::loadView('admin.report', ['data' => $data, 'income' => $income]);
             return $pdf->download('report.pdf');
         } else {

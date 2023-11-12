@@ -13,7 +13,11 @@
                 </svg>
             </button>
         </div>
+        <a href="/patient">
+            <h2 class="px-60 text-xl text-gray-600 dark:text-gray-600 font-semibold">Back</h2>
+        </a>
         <div class="flex justify-between md:order-2">
+
             <button type="button"
                 class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"

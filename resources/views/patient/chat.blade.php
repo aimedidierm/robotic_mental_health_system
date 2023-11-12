@@ -105,14 +105,22 @@
                                     <ul class="space-y-2 chat-container">
                                         <li class="flex justify-start">
                                             <div
-                                                class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
-                                                <span class="block">Hello can I know the kind of service do you need
-                                                    between: <br>
-                                                    @foreach ($services as $service)
-                                                    {{$service->id}}{{'. '}}{{$service->title}} <br>
-                                                    @endforeach
-                                                    You can replay with the number of your choice, thank you.</span>
+                                                class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded-3xl shadow">
+                                                <span class="block">
+                                                    <div class="flex items-center">
+                                                        <div class="w-8 h-8 rounded-full bg-white mr-2"></div>
+                                                        <div>
+                                                            Hello! Can I know the kind of service you need between: <br>
+                                                            @foreach ($services as $service)
+                                                            {{$service->id}}{{'. '}}{{$service->title}} <br>
+                                                            @endforeach
+                                                            You can reply with the number of your choice. Thank you.
+                                                        </div>
+                                                    </div>
+                                                </span>
                                             </div>
+
+
                                         </li>
                                     </ul>
                                 </div>
