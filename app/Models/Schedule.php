@@ -18,4 +18,9 @@ class Schedule extends Model
     {
         return $this->belongsTo(User::class, 'doctor_id');
     }
+
+    public function payments()
+    {
+        return $this->belongsTo(Payment::class, 'payment');
+    }
 }

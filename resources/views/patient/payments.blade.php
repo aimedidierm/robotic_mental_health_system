@@ -5,6 +5,7 @@
 <x-patient-navbar />
 <div class="sm:ml-64">
     <div class="px-4 py-28 relative overflow-x-auto">
+        <h2 class="text-xl text-grey-800 dark:text-white font-semibold mb-4">All payments</h2>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 neumorphic">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>

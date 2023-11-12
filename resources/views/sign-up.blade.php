@@ -44,7 +44,7 @@
                                     <label for="name"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                                         names</label>
-                                    <input type="name" name="name" id="name"
+                                    <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Enter your names" required="">
                                 </div>
@@ -55,6 +55,27 @@
                                     <input type="email" name="email" id="email"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="name@example.com" required="">
+                                </div>
+                            </div>
+                            <div class="flex space-x-4">
+                                <div class="w-1/2">
+                                    <label for="age"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                                        age</label>
+                                    <input type="number" name="age" id="age"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Enter your age" required="">
+                                </div>
+                                <div class="w-1/2">
+                                    <label for="status"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your
+                                        status</label>
+                                    <select name="status" id="status"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="single">Single</option>
+                                        <option value="married">Married</option>
+                                        <option value="divorced">Divorced</option>
+                                    </select>
                                 </div>
                             </div>
 

@@ -2,6 +2,10 @@
 
 @section('content')
 <style>
+    body {
+        font-family: 'Arial', sans-serif;
+    }
+
     .scrolling-text {
         white-space: nowrap;
         overflow: hidden;
@@ -22,6 +26,49 @@
         100% {
             transform: translateX(-100%);
         }
+    }
+
+    /* Additional styles for the chat interface */
+    .chat-container {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .message-container {
+        max-width: 80%;
+        margin-bottom: 1rem;
+        overflow-wrap: break-word;
+    }
+
+    .user-message {
+        text-align: right;
+    }
+
+    .bot-message {
+        text-align: left;
+    }
+
+    #message-input {
+        width: calc(100% - 48px);
+        padding: 10px;
+        margin: 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    #send-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #send-button:hover {
+        background-color: #45a049;
     }
 </style>
 <x-patient-navbar />

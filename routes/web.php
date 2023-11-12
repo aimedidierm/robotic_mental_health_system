@@ -57,4 +57,5 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => 
     Route::view('/settings', 'admin.settings');
     Route::post('/settings', [AdminController::class, 'update']);
     Route::get('/payments', [PaymentController::class, 'index']);
+    Route::get('/report', [ScheduleController::class, 'report']);
 });

@@ -5,6 +5,13 @@
 <x-admin-navbar />
 <div class="sm:ml-64">
     <div class="px-4 py-28 relative overflow-x-auto">
+        <div class="flex justify-between pb-4">
+            <h2 class="text-xl text-grey-800 dark:text-white font-semibold mb-4">All payments</h2>
+            <a href="/admin/report"
+                class="text-white justify-end bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Get report
+            </a>
+        </div>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 neumorphic">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>

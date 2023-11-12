@@ -35,6 +35,8 @@ class UserController extends Controller
                 'phone' => 'required|numeric|regex:/^07\d{8}$/',
                 'password' => 'required|string',
                 'confirmPassword' => 'required|string',
+                'age' => 'required|numeric',
+                'status' => 'required|string|in:single,married,divorced',
 
             ],
             $messages = [
@@ -46,6 +48,8 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
+            $user->age = $request->age;
+            $user->m_status = $request->status;
             $user->password = bcrypt($request->password);
             $user->role = 'patient';
             $user->created_at = now();

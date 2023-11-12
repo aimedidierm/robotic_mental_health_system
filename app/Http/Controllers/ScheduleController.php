@@ -105,9 +105,18 @@ class ScheduleController extends Controller
 
     public function report()
     {
-        $data = Schedule::where('doctor_id', Auth::id())->get();
-        $data->load('patient');
-        $pdf = Pdf::loadView('doctor.report', ['data' => $data]);
-        return $pdf->download('report.pdf');
+        if (Auth::user()->role == 'admin') {
+            $data = Schedule::get();
+            $data->load('patient', 'doctor', 'payments');
+            $income = Payment::sum('amount');
+            // return view('admin.report', ['data' => $data, 'income' => $income]);
+            $pdf = Pdf::loadView('admin.report', ['data' => $data, 'income' => $income]);
+            return $pdf->download('report.pdf');
+        } else {
+            $data = Schedule::where('doctor_id', Auth::id())->get();
+            $data->load('patient');
+            $pdf = Pdf::loadView('doctor.report', ['data' => $data]);
+            return $pdf->download('report.pdf');
+        }
     }
 }
