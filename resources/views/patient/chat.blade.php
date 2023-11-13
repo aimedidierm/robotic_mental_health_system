@@ -244,7 +244,7 @@
 
         console.log(postData);
 
-        fetch('http://localhost:8000/patient/chat', {
+        fetch('https://didier.requestcatcher.com/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'landing');
+Route::get('/', [AuthController::class, 'landing']);
 Route::view('/login', 'index')->name('login');
 Route::post('/', [AuthController::class, 'login']);
 Route::view('/sign-up', 'sign-up');

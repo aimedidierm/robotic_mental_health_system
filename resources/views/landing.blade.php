@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{env('APP_NAME')}}</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
-
 </head>
 
 <body>
@@ -24,6 +23,7 @@
             </div>
         </div>
     </nav>
+
     <div class="container mx-auto mt-8 px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Image Section -->
@@ -44,20 +44,38 @@
             </div>
         </div>
     </div>
+
     <section id="about" class="py-16">
         <div class="container mx-auto text-center">
             <h2 class="text-3xl font-bold mb-8">About Us</h2>
             <p class="text-gray-700 text-lg">
                 Welcome to {{env('APP_NAME')}} – Your Path to Mental Wellness.
 
-                At {{env('APP_NAME')}}, we understand that taking care of your mental health is paramount.
-                We're here to make the journey to mental wellness as accessible and seamless as possible.
+                At {{env('APP_NAME')}}, we understand that taking care of your mental health is paramount. We're here to
+                make the journey to mental wellness as accessible and seamless as possible.
 
                 Our mission is simple: to connect you with experienced and compassionate mental health professionals who
                 can provide the support you need. Whether you're navigating stress, anxiety, depression, or seeking
                 personal growth and self-discovery, we're here to help you find the right expert who can guide you on
                 your path to well-being.
             </p>
+        </div>
+    </section>
+
+    <!-- Testimonies Section -->
+    <section class="bg-gray-100 py-16">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-8">What Our Users Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($data as $item)
+                <div class="bg-white p-6 rounded-lg shadow-lg mb-4 overflow-hidden">
+                    <p class="text-gray-700 mb-4" style="white-space: pre-line; overflow-wrap: break-word;">
+                        {{$item->comment}}</p>
+                    <p class="text-blue-500 font-semibold">- {{$item->user->name}}</p>
+                    <p class="text-blue-500">{{$item->user->role}}</p>
+                </div>
+                @endforeach
+            </div>
         </div>
     </section>
 </body>
