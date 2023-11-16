@@ -34,7 +34,7 @@
                 @foreach ($schedules as $schedule)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$schedule->date}}
+                        {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $schedule->date)->format('Y-m-d')}}
                     </th>
                     <td class="px-6 py-4">
                         {{$schedule->title}}

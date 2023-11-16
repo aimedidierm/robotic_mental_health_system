@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('age')->nullable()->after('available');
+            $table->string('address')->nullable()->after('available');
+            $table->string('sponsor')->nullable()->after('address');
+            $table->integer('age')->nullable()->after('sponsor');
             $table->enum('m_status', ['single', 'married', 'divorced'])->default('single')->after('age');
         });
     }
@@ -25,6 +27,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('age');
             $table->dropColumn('m_status');
+            $table->dropColumn('address');
+            $table->dropColumn('sponsor');
         });
     }
 };

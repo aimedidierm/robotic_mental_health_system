@@ -28,6 +28,12 @@
                         Patient
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Address
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Sponsor
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Age
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -41,7 +47,7 @@
             <tbody>
                 @if ($schedules->isEmpty())
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" colspan="5"
+                    <th scope="row" colspan="9"
                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         No available schedule
                     </th>
@@ -50,7 +56,7 @@
                 @foreach ($schedules as $schedule)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$schedule->date}}
+                        {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $schedule->date)->format('Y-m-d')}}
                     </th>
                     <td class="px-6 py-4">
                         {{$schedule->title}}
@@ -60,6 +66,12 @@
                     </td>
                     <td class="px-6 py-4">
                         {{$schedule->patient->name}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{$schedule->patient->address}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{$schedule->patient->sponsor}}
                     </td>
                     <td class="px-6 py-4">
                         {{$schedule->patient->age}}

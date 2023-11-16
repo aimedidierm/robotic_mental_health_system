@@ -105,10 +105,9 @@
                                     <ul class="space-y-2 chat-container">
                                         <li class="flex justify-start">
                                             <div
-                                                class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded-3xl shadow">
+                                                class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
                                                 <span class="block">
                                                     <div class="flex items-center">
-                                                        <div class="w-8 h-8 rounded-full bg-white mr-2"></div>
                                                         <div>
                                                             Hello! Can I know the kind of service you need between: <br>
                                                             @foreach ($services as $service)
@@ -164,7 +163,7 @@
                 const sentMessageContainer = document.createElement('li');
                 sentMessageContainer.className = 'flex justify-end';
                 sentMessageContainer.innerHTML = `
-                    <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                    <div class="mr-2 py-3 px-4 bg-yellow-700 bg-gray-100 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                         <span class="block">${message}</span>
                     </div>
                 `;
@@ -195,14 +194,14 @@
                 sessionStorage.setItem('serviceChoice', userMessage);
 
                 botResponse = `
-                    <div class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
+                    <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
                         <span class="block">Great! Please provide a short description about the service you need.</span>
                     </div>
                 `;
                 step++;
             } else {
                 botResponse = `
-                    <div class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
+                    <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
                         <span class="block">Invalid input. Please enter a valid service number.</span>
                     </div>
                 `;
@@ -213,7 +212,7 @@
             sessionStorage.setItem('shortDescription', userMessage);
 
             botResponse = `
-                <div class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
+                <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
                     <span class="block">You can select a doctor from the following:<br>
                     @foreach ($doctors as $doctor)
                     {{$doctor->id}}{{'. '}}{{$doctor->name}} <br>
@@ -260,10 +259,10 @@
         });
 
         botResponse = `
-            <div class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
+            <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
                 
-<span class="block">Thank you for providing the information. We will contact you shortly. and you can find your schedule
-    <a href="/patient/schedules"><b class="text-red-700">Here</b></a></span>
+<span class="block">Thank you for providing the information. We will contact you shortly. and you can find your schedule for payment
+    <a href="/patient/payments"><b class="text-red-700">Here</b></a></span>
             </div>`;
         step++;
     } else {

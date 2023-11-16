@@ -6,6 +6,10 @@
     <div class="px-4 py-28 relative overflow-x-auto">
         <div class="flex justify-between pb-4">
             <h2 class="text-xl text-grey-800 dark:text-white font-semibold mb-4">All doctors</h2>
+            <a href="/admin/patients"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create
+                print patients
+            </a>
             <button type="button" data-modal-target="addNewModal" data-modal-toggle="addNewModal"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create
                 new doctor

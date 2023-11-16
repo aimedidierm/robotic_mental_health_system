@@ -59,6 +59,24 @@
                             </div>
                             <div class="flex space-x-4">
                                 <div class="w-1/2">
+                                    <label for="address"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                                        address</label>
+                                    <input type="text" name="address" id="address"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Enter your address" required="">
+                                </div>
+                                <div class="w-1/2">
+                                    <label for="sponsor"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                                        sponsor</label>
+                                    <input type="text" name="sponsor" id="sponsor"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Enter your sponsor person" required="">
+                                </div>
+                            </div>
+                            <div class="flex space-x-4">
+                                <div class="w-1/2">
                                     <label for="age"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                                         age</label>
