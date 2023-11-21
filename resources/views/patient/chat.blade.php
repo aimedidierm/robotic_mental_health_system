@@ -33,6 +33,14 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
+
+
+        background-image: url('wallpaper.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        padding: 10px;
+        Add any other styles you want for the scrolling-text div
     }
 
     .message-container {

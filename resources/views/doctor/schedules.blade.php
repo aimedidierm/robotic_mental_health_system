@@ -68,7 +68,7 @@
                         {{$schedule->patient->name}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$schedule->patient->address}}
+                        {{$schedule->patient->province}}, {{$schedule->patient->province}}
                     </td>
                     <td class="px-6 py-4">
                         {{$schedule->patient->sponsor}}

@@ -105,6 +105,15 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/admin/patients"
+                            class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <span class="material-symbols-outlined">
+                                group
+                            </span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Print patients</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/admin/settings"
                             class="flex items-center p-2  rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="material-symbols-outlined">

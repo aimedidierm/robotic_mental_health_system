@@ -35,6 +35,7 @@
 
 <body class="bg-opacity-50">
     <div class="container mx-auto p-4">
+        <img src="{{'rbc.png'}}" alt="" width="400" height="200">
         <h2 class="text-2xl font-semibold mb-4">List of all schedules payment</h2>
 
         <table style="width: 100%" class="w-full table-auto border border-collapse">
@@ -90,7 +91,7 @@
                         {{$patient->m_status}}
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$patient->address}} Rwf
+                        {{$patient->province}}, {{$patient->district}}
                     </td>
                 </tr>
                 @endforeach
