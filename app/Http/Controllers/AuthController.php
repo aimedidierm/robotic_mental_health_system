@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Province;
 use App\Models\Testimonial;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -54,5 +55,11 @@ class AuthController extends Controller
         } else {
             return back();
         }
+    }
+
+    public function signup()
+    {
+        $data = Province::get()->load('districts.sectors.cells.villages');
+        return view('sign-up', ['address' => $data]);
     }
 }

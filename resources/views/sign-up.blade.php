@@ -59,12 +59,55 @@
                             </div>
                             <div class="flex space-x-4">
                                 <div class="w-1/2">
-                                    <label for="address"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                                        address</label>
-                                    <input type="text" name="address" id="address"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Enter your address" required="">
+                                    <label for="province"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Province</label>
+                                    <select name="province" id="province"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @foreach ($address as $province)
+                                        <option value="{{$province->name}}">{{$province->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="w-1/2">
+                                    <label for="district"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        District</label>
+                                    <select name="district" id="district"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="district name"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex space-x-4">
+                                <div class="w-1/2">
+                                    <label for="sector"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Sector</label>
+                                    <select name="sector" id="sector"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="sector name"></option>
+                                    </select>
+                                </div>
+                                <div class="w-1/2">
+                                    <label for="cell"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Cell</label>
+                                    <select name="cell" id="cell"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="village name"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex space-x-4">
+                                <div class="w-1/2">
+                                    <label for="village"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Village</label>
+                                    <select name="village" id="village"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="village name"></option>
+                                    </select>
                                 </div>
                                 <div class="w-1/2">
                                     <label for="sponsor"
@@ -86,7 +129,8 @@
                                 </div>
                                 <div class="w-1/2">
                                     <label for="status"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
+                                        your
                                         status</label>
                                     <select name="status" id="status"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -138,3 +182,117 @@
 </body>
 
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const provinces = @json($address);
+        const districtDropdown = document.getElementById('district');
+        const sectorDropdown = document.getElementById('sector');
+        const cellDropdown = document.getElementById('cell');
+        const villageDropdown = document.getElementById('village');
+
+        const updateDistricts = () => {
+            const selectedProvince = document.getElementById('province').value;
+            const selectedProvinceObj = provinces.find(province => province.name === selectedProvince);
+
+            districtDropdown.innerHTML = '<option value="">Select District</option>';
+            sectorDropdown.innerHTML = '<option value="">Select Sector</option>';
+            cellDropdown.innerHTML = '<option value="">Select Cell</option>';
+            villageDropdown.innerHTML = '<option value="">Select Village</option>';
+
+            if (selectedProvinceObj) {
+                selectedProvinceObj.districts.forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district.name;
+                    option.textContent = district.name;
+                    districtDropdown.appendChild(option);
+                });
+            }
+        };
+
+        const updateSectors = () => {
+            const selectedDistrict = document.getElementById('district').value;
+            const selectedProvince = document.getElementById('province').value;
+            const selectedProvinceObj = provinces.find(province => province.name === selectedProvince);
+
+            sectorDropdown.innerHTML = '<option value="">Select Sector</option>';
+            cellDropdown.innerHTML = '<option value="">Select Cell</option>';
+            villageDropdown.innerHTML = '<option value="">Select Village</option>';
+
+            if (selectedProvinceObj) {
+                const selectedDistrictObj = selectedProvinceObj.districts.find(district => district.name === selectedDistrict);
+
+                if (selectedDistrictObj) {
+                    selectedDistrictObj.sectors.forEach(sector => {
+                        const option = document.createElement('option');
+                        option.value = sector.name;
+                        option.textContent = sector.name;
+                        sectorDropdown.appendChild(option);
+                    });
+                }
+            }
+        };
+
+        const updateCells = () => {
+            const selectedSector = document.getElementById('sector').value;
+            const selectedDistrict = document.getElementById('district').value;
+            const selectedProvince = document.getElementById('province').value;
+            const selectedProvinceObj = provinces.find(province => province.name === selectedProvince);
+
+            cellDropdown.innerHTML = '<option value="">Select Cell</option>';
+            villageDropdown.innerHTML = '<option value="">Select Village</option>';
+
+            if (selectedProvinceObj) {
+                const selectedDistrictObj = selectedProvinceObj.districts.find(district => district.name === selectedDistrict);
+
+                if (selectedDistrictObj) {
+                    const selectedSectorObj = selectedDistrictObj.sectors.find(sector => sector.name === selectedSector);
+
+                    if (selectedSectorObj) {
+                        selectedSectorObj.cells.forEach(cell => {
+                            const option = document.createElement('option');
+                            option.value = cell.name;
+                            option.textContent = cell.name;
+                            cellDropdown.appendChild(option);
+                        });
+                    }
+                }
+            }
+        };
+
+        const updateVillages = () => {
+            const selectedCell = document.getElementById('cell').value;
+            const selectedSector = document.getElementById('sector').value;
+            const selectedDistrict = document.getElementById('district').value;
+            const selectedProvince = document.getElementById('province').value;
+            const selectedProvinceObj = provinces.find(province => province.name === selectedProvince);
+
+            villageDropdown.innerHTML = '<option value="">Select Village</option>';
+
+            if (selectedProvinceObj) {
+                const selectedDistrictObj = selectedProvinceObj.districts.find(district => district.name === selectedDistrict);
+
+                if (selectedDistrictObj) {
+                    const selectedSectorObj = selectedDistrictObj.sectors.find(sector => sector.name === selectedSector);
+
+                    if (selectedSectorObj) {
+                        const selectedCellObj = selectedSectorObj.cells.find(cell => cell.name === selectedCell);
+
+                        if (selectedCellObj) {
+                            selectedCellObj.villages.forEach(village => {
+                                const option = document.createElement('option');
+                                option.value = village.name;
+                                option.textContent = village.name;
+                                villageDropdown.appendChild(option);
+                            });
+                        }
+                    }
+                }
+            }
+        };
+
+        document.getElementById('province').addEventListener('change', updateDistricts);
+        document.getElementById('district').addEventListener('change', updateSectors);
+        document.getElementById('sector').addEventListener('change', updateCells);
+        document.getElementById('cell').addEventListener('change', updateVillages);
+    });
+</script>

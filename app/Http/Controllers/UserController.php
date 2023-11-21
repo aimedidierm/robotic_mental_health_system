@@ -31,7 +31,11 @@ class UserController extends Controller
         $request->validate(
             [
                 'name' => 'required|string',
-                'address' => 'required|string',
+                'province' => 'required|string',
+                'district' => 'required|string',
+                'sector' => 'required|string',
+                'cell' => 'required|string',
+                'village' => 'required|string',
                 'sponsor' => 'required|string',
                 'email' => 'required|email|unique:users,email',
                 'phone' => 'required|numeric|regex:/^07\d{8}$/',
@@ -48,7 +52,11 @@ class UserController extends Controller
         if ($request->password == $request->confirmPassword) {
             $user = new User;
             $user->name = $request->name;
-            $user->address = $request->address;
+            $user->province = $request->province;
+            $user->district = $request->district;
+            $user->sector = $request->sector;
+            $user->cell = $request->cell;
+            $user->village = $request->village;
             $user->sponsor = $request->sponsor;
             $user->email = $request->email;
             $user->phone = $request->phone;
