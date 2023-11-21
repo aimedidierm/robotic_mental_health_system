@@ -223,7 +223,7 @@
                 <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
                     <span class="block">You can select a doctor from the following:<br>
                     @foreach ($doctors as $doctor)
-                    {{$doctor->id}}{{'. '}}{{$doctor->name}} <br>
+                    {{$doctor->id}}{{'. '}}{{$doctor->name}} Available: {{$doctor->available}} <br>
                     @endforeach
                     You can replay with the number of your choice.
                     </span>
@@ -251,7 +251,7 @@
 
         console.log(postData);
 
-        fetch('https://didier.requestcatcher.com/', {
+        fetch('/patient/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

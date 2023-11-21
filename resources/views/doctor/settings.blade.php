@@ -10,13 +10,10 @@
             <form action="/doctor/settings" method="post">
                 @csrf
                 <div class="mb-4">
-                    <label for="status"
+                    <label for="available"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
-                    <select name="status" id="status"
+                    <input type="datetime-local" id="available" name="available" value="{{Auth::user()->available}}"
                         class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600">
-                        <option value="1">Available</option>
-                        <option value="0">Busy</option>
-                    </select>
                 </div>
                 <div class="mb-4">
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>

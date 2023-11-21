@@ -35,7 +35,7 @@ class ScheduleController extends Controller
     {
         $data = Service::get();
         $total = Service::get()->count();
-        $doctors = User::where('role', 'doctor')->where('available', true)->get();
+        $doctors = User::where('role', 'doctor')->get();
         return view('patient.chat', ['services' => $data, 'totalServices' => $total, 'doctors' => $doctors]);
     }
 
@@ -57,7 +57,7 @@ class ScheduleController extends Controller
             $schedule->title = $selectedService->title;
             $schedule->user_id = Auth::id();
             $schedule->doctor_id = $doctor->id;
-            $schedule->date = now();
+            $schedule->date = $doctor->available;
             $schedule->comment = $request->shortDescription;
             $schedule->save();
             $payment = new Payment;
