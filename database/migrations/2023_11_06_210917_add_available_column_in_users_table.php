@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('available')->nullable()->after('role');
+            $table->dateTime('available_1')->nullable()->after('role');
+            $table->dateTime('available_2')->nullable()->after('available_1');
+            $table->dateTime('available_3')->nullable()->after('available_2');
         });
     }
 

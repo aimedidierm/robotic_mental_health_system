@@ -24,6 +24,14 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="price" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Payment
+                        Price</label>
+                    <input type="number" id="price" name="price" value="{{$price->amount}}"
+                        class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600"
+                        required>
+                </div>
+
+                <div class="mb-4">
                     <label for="password"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
                     <input type="password" id="password" name="password"

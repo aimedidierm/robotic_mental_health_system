@@ -221,69 +221,103 @@
 
             botResponse = `
                 <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
+                    @if($doctors->isNotEmpty())
                     <span class="block">You can select a doctor from the following:<br>
-                    @foreach ($doctors as $doctor)
-                    {{$doctor->id}}{{'. '}}{{$doctor->name}} Available: {{$doctor->available}} <br>
-                    @endforeach
-                    You can replay with the number of your choice.
+                        @foreach ($doctors as $doctor)
+                        {{$doctor->id}}{{'. '}}{{$doctor->name}} Available: 
+                        @if($doctor->available_1)
+                            1. {{$doctor->available_1}}
+                        @endif
+
+                        @if($doctor->available_2)
+                            , 2. {{$doctor->available_2}}
+                        @endif
+
+                        @if($doctor->available_3)
+                            , 3. {{$doctor->available_3}}
+                        @endif
+
+                        @if(!$doctor->available_1 && !$doctor->available_2 && !$doctor->available_3)
+                            Not available time
+                        @endif
+                        <br>
+                        You can replay with the number of your doctor choice.
+                        @endforeach
+                    @else
+                        No Available doctor
+                    @endif
                     </span>
                 </div>
             `;
             step++;
             break;
+        case 3:
+            const availlableDoctor = userMessage.trim();
 
-            case 3:
-    const availlableDoctor = userMessage.trim();
+            if (availlableDoctor) {
+                sessionStorage.setItem('availlableDoctor', availlableDoctor);
+                botResponse = `
+                <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
+                    <span class="block">
+                        Replay with the code of your doctor time (1,2,3)
+                    </span>
+                </div>
+            `;
+            }
+            step++;
+            break;
+        case 4:
+            const availlableTime = userMessage.trim();
+            if (availlableTime) {
+                sessionStorage.setItem('availlableTime', availlableTime);
+                const serviceChoice = sessionStorage.getItem('serviceChoice');
+                const shortDescription = sessionStorage.getItem('shortDescription');
+                const availlableDoctor = sessionStorage.getItem('availlableDoctor');
 
-    if (availlableDoctor) {
-        sessionStorage.setItem('availlableDoctor', availlableDoctor);
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        const serviceChoice = sessionStorage.getItem('serviceChoice');
-        const shortDescription = sessionStorage.getItem('shortDescription');
+                const postData = {
+                    serviceChoice,
+                    shortDescription,
+                    availlableDoctor,
+                    availlableTime
+                };
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                console.log(postData);
 
-        const postData = {
-            serviceChoice,
-            shortDescription,
-            availlableDoctor
-        };
+                fetch('/patient/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                    body: JSON.stringify(postData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
-        console.log(postData);
+                botResponse = `
+                    <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
+                        
+                    <span class="block">Thank you for providing the information. you can check if schedule generated for payment
+                        <a href="/patient/payments"><b class="text-red-700">Here</b></a></span>
+                                </div>`;
+                step++;
+            } else {
+                botResponse = `
+                    <div class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
+                        <span class="block">Invalid date format. Please enter a valid date (YYYY-MM-DD).</span>
+                    </div>`;
+            }
+            break;
+            }
 
-        fetch('/patient/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-            },
-            body: JSON.stringify(postData)
-        })
-        .then(response => response.json())
-        .then(data => {
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-
-        botResponse = `
-            <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
-                
-<span class="block">Thank you for providing the information. We will contact you shortly. and you can find your schedule for payment
-    <a href="/patient/payments"><b class="text-red-700">Here</b></a></span>
-            </div>`;
-        step++;
-    } else {
-        botResponse = `
-            <div class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
-                <span class="block">Invalid date format. Please enter a valid date (YYYY-MM-DD).</span>
-            </div>`;
-    }
-    break;
-    }
-
-    receivedMessageContainer.innerHTML = botResponse;
-    chatContainer.appendChild(receivedMessageContainer);
-}
+            receivedMessageContainer.innerHTML = botResponse;
+            chatContainer.appendChild(receivedMessageContainer);
+        }
     </script>
     @stop

@@ -51,12 +51,6 @@
                         Patient
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        Patient Age
-                    </th>
-                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        Patient Status
-                    </th>
-                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Doctor
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
@@ -67,7 +61,7 @@
             <tbody>
                 @if ($data->isEmpty())
                 <tr style="padding: 8px; border: 1px solid #0c0c0c;">
-                    <td class="px-4 py-2 border" colspan="6">No available data</td>
+                    <td class="px-4 py-2 border" colspan="5">No available data</td>
                 </tr>
                 @else
                 @foreach ($data as $schedule)
@@ -80,12 +74,6 @@
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->patient->name}}
-                    </td>
-                    <td style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$schedule->patient->age}}
-                    </td>
-                    <td style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$schedule->patient->m_status}}
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->doctor->name}}

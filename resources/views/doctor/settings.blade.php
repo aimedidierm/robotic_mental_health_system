@@ -10,9 +10,21 @@
             <form action="/doctor/settings" method="post">
                 @csrf
                 <div class="mb-4">
-                    <label for="available"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
-                    <input type="datetime-local" id="available" name="available" value="{{Auth::user()->available}}"
+                    <label for="available" class="block text-sm font-medium text-gray-700 dark:text-gray-300">First
+                        Available</label>
+                    <input type="datetime-local" id="available" name="available_1" value="{{Auth::user()->available_1}}"
+                        class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600">
+                </div>
+                <div class="mb-4">
+                    <label for="available" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Second
+                        Available</label>
+                    <input type="datetime-local" id="available" name="available_2" value="{{Auth::user()->available_2}}"
+                        class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600">
+                </div>
+                <div class="mb-4">
+                    <label for="available" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Third
+                        Available</label>
+                    <input type="datetime-local" id="available" name="available_3" value="{{Auth::user()->available_2}}"
                         class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600">
                 </div>
                 <div class="mb-4">

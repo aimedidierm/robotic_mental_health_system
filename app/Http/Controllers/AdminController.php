@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Price;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        $price = Price::latest()->first();
+        return view('admin.settings', compact('price'));
     }
 
     /**
@@ -78,6 +80,7 @@ class AdminController extends Controller
                 'password' => 'required|string',
                 'password_confirmation' => 'required|string',
                 'phone' => 'required|numeric|regex:/^07\d{8}$/',
+                'price' => 'required|numeric'
             ],
             $messages = [
                 'phone.regex' => 'The phone number must start with "07" and be 10 digits long.',
@@ -90,6 +93,9 @@ class AdminController extends Controller
             $admin->phone = $request->phone;
             $admin->password = bcrypt($request->password);
             $admin->update();
+            $price = new Price;
+            $price->amount = $request->price;
+            $price->save();
             return redirect('/admin/settings');
         } else {
             return redirect('/admin/settings')->withErrors('Passwords not match');

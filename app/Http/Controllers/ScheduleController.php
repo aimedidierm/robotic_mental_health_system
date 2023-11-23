@@ -35,7 +35,13 @@ class ScheduleController extends Controller
     {
         $data = Service::get();
         $total = Service::get()->count();
-        $doctors = User::where('role', 'doctor')->get();
+        $doctors = User::where('role', 'doctor')
+            ->where(function ($query) {
+                $query->orWhereNotNull('available_1')
+                    ->orWhereNotNull('available_2')
+                    ->orWhereNotNull('available_3');
+            })
+            ->get();
         return view('patient.chat', ['services' => $data, 'totalServices' => $total, 'doctors' => $doctors]);
     }
 
@@ -45,6 +51,7 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'availlableTime' => 'required',
             'availlableDoctor' => 'required',
             'serviceChoice' => 'required|numeric',
             'shortDescription' => 'required|string',
@@ -53,11 +60,27 @@ class ScheduleController extends Controller
         $selectedService = Service::where('id', $request->serviceChoice)->first();
         $doctor = User::find($request->availlableDoctor);
         if ($doctor) {
+            if ($request->availlableTime == 1) {
+                $availableTime = $doctor->available_1;
+                $doctor->available_1 = null;
+                $doctor->update();
+            } elseif ($request->availlableTime == 2) {
+                $availableTime = $doctor->available_2;
+                $doctor->available_2 = null;
+                $doctor->update();
+            } elseif ($request->availlableTime == 3) {
+                $availableTime = $doctor->available_3;
+                $doctor->available_3 = null;
+                $doctor->update();
+            } else {
+                # code...
+            }
+
             $schedule = new Schedule;
             $schedule->title = $selectedService->title;
             $schedule->user_id = Auth::id();
             $schedule->doctor_id = $doctor->id;
-            $schedule->date = $doctor->available;
+            $schedule->date = $availableTime;
             $schedule->comment = $request->shortDescription;
             $schedule->save();
             $payment = new Payment;

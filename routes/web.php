@@ -54,7 +54,7 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => 
     Route::get('/admins/{id}', [AdminController::class, 'destroy']);
     Route::resource('/doctors', DoctorController::class)->only('index', 'store');
     Route::get('/doctors/{id}', [DoctorController::class, 'destroy']);
-    Route::view('/settings', 'admin.settings');
+    Route::get('/settings', [AdminController::class, 'create']);
     Route::post('/settings', [AdminController::class, 'update']);
     Route::get('/payments', [PaymentController::class, 'index']);
     Route::get('/report', [ScheduleController::class, 'report']);

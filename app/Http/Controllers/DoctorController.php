@@ -78,7 +78,9 @@ class DoctorController extends Controller
                 'password' => 'required|string',
                 'password_confirmation' => 'required|string',
                 'phone' => 'required|numeric|regex:/^07\d{8}$/',
-                'available' => 'required|date'
+                'available_1' => 'required|date',
+                'available_2' => 'required|date',
+                'available_3' => 'required|date'
             ],
             $messages = [
                 'phone.regex' => 'The phone number must start with "07" and be 10 digits long.',
@@ -88,7 +90,9 @@ class DoctorController extends Controller
             $doctor = User::find(Auth::id());
             $doctor->name = $request->name;
             $doctor->phone = $request->phone;
-            $doctor->available = $request->available;
+            $doctor->available_1 = $request->available_1;
+            $doctor->available_2 = $request->available_2;
+            $doctor->available_3 = $request->available_3;
             $doctor->password = bcrypt($request->password);
             $doctor->update();
             return redirect('/doctor/settings');
