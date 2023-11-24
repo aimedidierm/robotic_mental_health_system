@@ -41,7 +41,7 @@ class UserController extends Controller
                 'phone' => 'required|numeric|regex:/^07\d{8}$/',
                 'password' => 'required|string',
                 'confirmPassword' => 'required|string',
-                'age' => 'required|numeric',
+                'age' => 'required|date',
                 'status' => 'required|string|in:single,married,divorced',
 
             ],

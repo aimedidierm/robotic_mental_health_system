@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Price;
 use App\Models\Schedule;
 use App\Models\Service;
 use App\Models\User;
@@ -75,7 +76,7 @@ class ScheduleController extends Controller
             } else {
                 # code...
             }
-
+            $price = Price::latest()->first();
             $schedule = new Schedule;
             $schedule->title = $selectedService->title;
             $schedule->user_id = Auth::id();
@@ -84,7 +85,7 @@ class ScheduleController extends Controller
             $schedule->comment = $request->shortDescription;
             $schedule->save();
             $payment = new Payment;
-            $payment->amount = 400;
+            $payment->amount = $price->amount;
             $payment->schedule_id = $schedule->id;
             $payment->user_id = Auth::id();
             $payment->save();
@@ -128,10 +129,17 @@ class ScheduleController extends Controller
     public function report()
     {
         if (Auth::user()->role == 'admin') {
-            $data = Schedule::get();
-            $data->load('patient', 'doctor', 'payments');
-            $income = Payment::sum('amount');
-            $pdf = Pdf::loadView('admin.report', ['data' => $data, 'income' => $income]);
+            $total = Payment::sum('amount');
+            $data = Schedule::with('patient', 'doctor', 'payments')->get();
+            $groupedData = $data->groupBy('doctor_id');
+            $doctorIncomes = [];
+            foreach ($groupedData as $doctorId => $schedules) {
+                $totalIncome = $schedules->sum(function ($schedule) {
+                    return $schedule->payments->amount ?? 0;
+                });
+                $doctorIncomes[$doctorId] = $totalIncome;
+            }
+            $pdf = Pdf::loadView('admin.report', ['groupedData' => $groupedData, 'doctorIncomes' => $doctorIncomes, 'income' => $total]);
             return $pdf->download('report.pdf');
         } else {
             $data = Schedule::where('doctor_id', Auth::id())->get();

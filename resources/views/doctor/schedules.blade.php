@@ -34,7 +34,7 @@
                         Sponsor
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Age
+                        Date of birth
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Status

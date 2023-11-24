@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cell')->nullable()->after('sector');
             $table->string('village')->nullable()->after('cell');
             $table->string('sponsor')->nullable()->after('village');
-            $table->integer('age')->nullable()->after('sponsor');
+            $table->date('age')->nullable()->after('sponsor');
             $table->enum('m_status', ['single', 'married', 'divorced'])->default('single')->after('age');
         });
     }

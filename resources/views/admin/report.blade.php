@@ -59,12 +59,8 @@
                 </tr>
             </thead>
             <tbody>
-                @if ($data->isEmpty())
-                <tr style="padding: 8px; border: 1px solid #0c0c0c;">
-                    <td class="px-4 py-2 border" colspan="5">No available data</td>
-                </tr>
-                @else
-                @foreach ($data as $schedule)
+                @forelse ($groupedData as $doctorId => $schedules)
+                @foreach ($schedules as $schedule)
                 <tr>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->date}}
@@ -83,7 +79,16 @@
                     </td>
                 </tr>
                 @endforeach
-                @endif
+                <tr>
+                    <th colspan="4" style="padding: 8px; border: 1px solid #0c0c0c;">Total Income for
+                        {{$schedules[0]->doctor->name}}</th>
+                    <td style="padding: 8px; border: 1px solid #0c0c0c;">{{$doctorIncomes[$doctorId]}} Rwf</td>
+                </tr>
+                @empty
+                <tr style="padding: 8px; border: 1px solid #0c0c0c;">
+                    <td class="px-4 py-2 border" colspan="5">No available data</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
         <h2 class="text-2xl font-semibold mb-4">Total income {{$income}} Rwf</h2>

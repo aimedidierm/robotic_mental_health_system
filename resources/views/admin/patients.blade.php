@@ -54,7 +54,7 @@
                         Sponsor
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        Age
+                        Date of birth
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Status

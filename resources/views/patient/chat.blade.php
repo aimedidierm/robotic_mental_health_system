@@ -241,8 +241,8 @@
                             Not available time
                         @endif
                         <br>
-                        You can replay with the number of your doctor choice.
                         @endforeach
+                        You can replay with the number of your doctor choice.
                     @else
                         No Available doctor
                     @endif
