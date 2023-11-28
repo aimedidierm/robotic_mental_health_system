@@ -152,51 +152,65 @@
     </div>
     <script>
         const chatContainer = document.querySelector('.chat-container');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
-    
-        let step = 1;
-    
-        messageInput.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                sendButton.click();
-            }
-        });
-    
-        sendButton.addEventListener('click', () => {
-            const message = messageInput.value.trim();
-    
-            if (message !== '') {
-                const sentMessageContainer = document.createElement('li');
-                sentMessageContainer.className = 'flex justify-end';
-                sentMessageContainer.innerHTML = `
-                    <div class="mr-2 py-3 px-4 bg-yellow-700 bg-gray-100 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                        <span class="block">${message}</span>
-                    </div>
-                `;
-    
-                chatContainer.appendChild(sentMessageContainer);
-    
-                messageInput.value = '';
-    
-                setTimeout(() => {
-                    handleBotResponse(message);
-                }, 1000);
-            }
-        });
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+
+    let step = 1;
+
+    messageInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            sendButton.click();
+        }
+    });
+
+    sendButton.addEventListener('click', () => {
+        const message = messageInput.value.trim();
+
+        if (message !== '') {
+            const sentMessageContainer = document.createElement('li');
+            sentMessageContainer.className = 'flex justify-end';
+            sentMessageContainer.innerHTML = `
+                <div class="mr-2 py-3 px-4 bg-yellow-700 bg-gray-100 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                    <span class="block">${message}</span>
+                </div>
+            `;
+
+            chatContainer.appendChild(sentMessageContainer);
+
+            messageInput.value = '';
+
+            setTimeout(() => {
+                handleBotResponse(message);
+            }, 1000);
+        }
+    });
+
     const totalServices = {!! json_encode($totalServices) !!};
+
     function isValidServiceChoice(input) {
         const choice = parseInt(input);
         return !isNaN(choice) && choice >= 1 && choice <= totalServices;
     }
 
-    function handleBotResponse(userMessage) {
-    const receivedMessageContainer = document.createElement('li');
-    receivedMessageContainer.className = 'flex justify-start';
-    let botResponse = '';
+    function isValidDoctorChoice(input, doctors) {
+    const doctorIds = doctors.map(doctor => doctor.id);
+    const choice = parseInt(input);
+    return !isNaN(choice) && doctorIds.includes(choice);
+    }
 
-    switch (step) {
+    function isValidTimeChoice(input, doctor) {
+        const choice = parseInt(input);
+        const availableTimes = [doctor.available_1, doctor.available_2, doctor.available_3].filter(time => time);
+        return !isNaN(choice) && choice >= 1 && choice <= availableTimes.length;
+    }
+
+    function handleBotResponse(userMessage) {
+        const receivedMessageContainer = document.createElement('li');
+        receivedMessageContainer.className = 'flex justify-start';
+        let botResponse = '';
+
+        switch (step) {
         case 1:
             if (isValidServiceChoice(userMessage)) {
                 sessionStorage.setItem('serviceChoice', userMessage);
@@ -224,7 +238,7 @@
                     @if($doctors->isNotEmpty())
                     <span class="block">You can select a doctor from the following:<br>
                         @foreach ($doctors as $doctor)
-                        {{$doctor->id}}{{'. '}}{{$doctor->name}} Available: 
+                        {{$doctor->id}}{{'. '}}{{$doctor->name}} is available on: 
                         @if($doctor->available_1)
                             1. {{$doctor->available_1}}
                         @endif
@@ -251,36 +265,52 @@
             `;
             step++;
             break;
-        case 3:
-            const availlableDoctor = userMessage.trim();
+            case 3:
+    const availableDoctor = userMessage.trim();
+    const doctors = {!! json_encode($doctors) !!};
 
-            if (availlableDoctor) {
-                sessionStorage.setItem('availlableDoctor', availlableDoctor);
-                botResponse = `
-                <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
-                    <span class="block">
-                        Replay with the code of your doctor time (1,2,3)
-                    </span>
-                </div>
-            `;
-            }
-            step++;
-            break;
-        case 4:
-            const availlableTime = userMessage.trim();
-            if (availlableTime) {
-                sessionStorage.setItem('availlableTime', availlableTime);
-                const serviceChoice = sessionStorage.getItem('serviceChoice');
-                const shortDescription = sessionStorage.getItem('shortDescription');
-                const availlableDoctor = sessionStorage.getItem('availlableDoctor');
+    if (isValidDoctorChoice(availableDoctor, doctors)) {
+        sessionStorage.setItem('availableDoctor', availableDoctor);
+        botResponse = `
+            <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
+                <span class="block">
+                    Reply with the code of your doctor's available time (1, 2, 3).
+                </span>
+            </div>
+        `;
+        step++;
+    } else {
+        botResponse = `
+            <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
+                <span class="block">Invalid input. Please enter a valid doctor number.</span>
+            </div>
+        `;
+    }
+    break;
+    function isValidTimeChoice(input, availableTimes) {
+    const choice = parseInt(input);
+    return !isNaN(choice) && choice >= 1 && choice <= availableTimes.length;
+}
+
+case 4:
+    const availableTime = userMessage.trim();
+    const storedDoctorId = sessionStorage.getItem('availableDoctor');
+    const doctorsData = {!! json_encode($doctors) !!};
+    const selectedDoctor = doctorsData.find(doctor => doctor.id == storedDoctorId);
+
+    if (isValidTimeChoice(availableTime, getAvailableTimes(selectedDoctor))) {
+        sessionStorage.setItem('availableTime', availableTime);
+                    const serviceChoice = sessionStorage.getItem('serviceChoice');
+                    const shortDescription = sessionStorage.getItem('shortDescription');
+                    const availableDoctor = sessionStorage.getItem('availableDoctor');
 
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
                 const postData = {
                     serviceChoice,
                     shortDescription,
-                    availlableDoctor,
-                    availlableTime
+                    availableDoctor,
+                    availableTime
                 };
 
                 console.log(postData);
@@ -291,33 +321,47 @@
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': csrfToken,
                     },
-                    body: JSON.stringify(postData)
+                    body: JSON.stringify(postData) // Ensure postData is serialized to JSON
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Success:', data);
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    if (error instanceof SyntaxError) {
+                        console.error('Error: Invalid JSON in response');
+                    } else {
+                        console.error('Error:', error);
+                    }
                 });
 
                 botResponse = `
-                    <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
-                        
-                    <span class="block">Thank you for providing the information. you can check if schedule generated for payment
-                        <a href="/patient/payments"><b class="text-red-700">Here</b></a></span>
-                                </div>`;
-                step++;
-            } else {
-                botResponse = `
-                    <div class="relative max-w-xl px-4 py-2 text-white dark:bg-blue-400 bg-blue-600 dark:text-white rounded shadow">
-                        <span class="block">Invalid date format. Please enter a valid date (YYYY-MM-DD).</span>
-                    </div>`;
-            }
-            break;
-            }
-
-            receivedMessageContainer.innerHTML = botResponse;
-            chatContainer.appendChild(receivedMessageContainer);
+                        <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
+                            <span class="block">Thank you for providing the information. You can check if a schedule has been generated for payment
+                                <a href="/patient/payments"><b class="text-red-700">Here</b></a>
+                            </span>
+                        </div>`;
+                    step++;
+                } else {
+                    botResponse = `
+                        <div class="ml-2 py-3 px-4 dark:bg-blue-400 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-3xl text-white">
+                            <span class="block">Invalid input. Please enter a valid time number.</span>
+                        </div>`;
+                }
+                break;
         }
+
+        receivedMessageContainer.innerHTML = botResponse;
+        chatContainer.appendChild(receivedMessageContainer);
+    function getAvailableTimes(selectedDoctor) {
+    const times = [];
+    if (selectedDoctor) {
+        if (selectedDoctor.available_1) times.push(1);
+        if (selectedDoctor.available_2) times.push(2);
+        if (selectedDoctor.available_3) times.push(3);
+    }
+    return times;
+    }
+    }
     </script>
     @stop

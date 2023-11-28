@@ -10,10 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
-    public function print()
+    public function print(Request $request)
     {
+        if ($request->district == null) {
+            $data = User::where('role', 'patient')->get();
+        } else {
+            $data = User::where('role', 'patient')->where('district', $request->district)->get();
+        }
 
-        $data = User::where('role', 'patient')->get();
         $pdf = Pdf::loadView('admin.patients', ['patients' => $data]);
         return $pdf->download('patients.pdf');
     }

@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class ScheduleController extends Controller
 {
@@ -51,25 +53,35 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'availlableTime' => 'required',
-            'availlableDoctor' => 'required',
-            'serviceChoice' => 'required|numeric',
-            'shortDescription' => 'required|string',
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'availableTime' => 'required',
+                'availableDoctor' => 'required',
+                'serviceChoice' => 'required',
+                'shortDescription' => 'required|string',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(
+                ['errors' => $validator->errors()],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
 
         $selectedService = Service::where('id', $request->serviceChoice)->first();
-        $doctor = User::find($request->availlableDoctor);
+        $doctor = User::find($request->availableDoctor);
         if ($doctor) {
-            if ($request->availlableTime == 1) {
+            if ($request->availableTime == 1) {
                 $availableTime = $doctor->available_1;
                 $doctor->available_1 = null;
                 $doctor->update();
-            } elseif ($request->availlableTime == 2) {
+            } elseif ($request->availableTime == 2) {
                 $availableTime = $doctor->available_2;
                 $doctor->available_2 = null;
                 $doctor->update();
-            } elseif ($request->availlableTime == 3) {
+            } elseif ($request->availableTime == 3) {
                 $availableTime = $doctor->available_3;
                 $doctor->available_3 = null;
                 $doctor->update();
@@ -89,8 +101,9 @@ class ScheduleController extends Controller
             $payment->schedule_id = $schedule->id;
             $payment->user_id = Auth::id();
             $payment->save();
+            return response()->json(['message' => 'chat created']);
         } else {
-            # code...
+            return response()->json(['message' => 'Doctor not found']);
         }
     }
 
