@@ -14,11 +14,13 @@ class PatientController extends Controller
     {
         if ($request->district == null) {
             $data = User::where('role', 'patient')->get();
+            $district = 'all districts';
         } else {
             $data = User::where('role', 'patient')->where('district', $request->district)->get();
+            $district = $request->district;
         }
 
-        $pdf = Pdf::loadView('admin.patients', ['patients' => $data]);
+        $pdf = Pdf::loadView('admin.patients', ['patients' => $data, 'district' => $district]);
         return $pdf->download('patients.pdf');
     }
 

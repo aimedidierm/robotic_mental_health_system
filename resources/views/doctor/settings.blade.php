@@ -45,16 +45,14 @@
                     <label for="password"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
                     <input type="password" id="password" name="password"
-                        class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600"
-                        required>
+                        class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600">
                 </div>
 
                 <div class="mb-4">
                     <label for="password_confirmation"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
                     <input type="password" id="password_confirmation" name="password_confirmation"
-                        class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600"
-                        required>
+                        class="mt-1 p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:border-gray-600">
                 </div>
 
                 <div class="flex justify-end">

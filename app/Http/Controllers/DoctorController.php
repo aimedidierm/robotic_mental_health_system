@@ -75,8 +75,8 @@ class DoctorController extends Controller
         $request->validate(
             [
                 'name' => 'required|string',
-                'password' => 'required|string',
-                'password_confirmation' => 'required|string',
+                'password' => 'nullable|string',
+                'password_confirmation' => 'nullable|string',
                 'phone' => 'required|numeric|regex:/^07\d{8}$/',
                 'available_1' => 'required|date',
                 'available_2' => 'required|date',
@@ -86,18 +86,29 @@ class DoctorController extends Controller
                 'phone.regex' => 'The phone number must start with "07" and be 10 digits long.',
             ]
         );
-        if ($request->password == $request->password_confirmation) {
+        if ($request->has('password')) {
+            if ($request->password == $request->password_confirmation) {
+                $doctor = User::find(Auth::id());
+                $doctor->name = $request->name;
+                $doctor->phone = $request->phone;
+                $doctor->available_1 = $request->available_1;
+                $doctor->available_2 = $request->available_2;
+                $doctor->available_3 = $request->available_3;
+                $doctor->password = bcrypt($request->password);
+                $doctor->update();
+                return redirect('/doctor/settings');
+            } else {
+                return redirect('/doctor/settings')->withErrors('Passwords not match');
+            }
+        } else {
             $doctor = User::find(Auth::id());
             $doctor->name = $request->name;
             $doctor->phone = $request->phone;
             $doctor->available_1 = $request->available_1;
             $doctor->available_2 = $request->available_2;
             $doctor->available_3 = $request->available_3;
-            $doctor->password = bcrypt($request->password);
             $doctor->update();
             return redirect('/doctor/settings');
-        } else {
-            return redirect('/doctor/settings')->withErrors('Passwords not match');
         }
     }
 
