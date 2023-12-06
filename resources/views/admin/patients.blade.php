@@ -36,8 +36,9 @@
 <body class="bg-opacity-50">
     <div class="container mx-auto p-4">
         <img src="{{'rbc.png'}}" alt="" width="400" height="200">
-        <h2 class="text-2xl font-semibold mb-4">List of all patients from {{$district}}</h2>
-
+        <center>
+            <h2 class="text-2xl font-semibold mb-4">List of all patients from {{$district}}</h2>
+        </center>
         <table style="width: 100%" class="w-full table-auto border border-collapse">
             <thead>
                 <tr>
@@ -99,6 +100,8 @@
             </tbody>
         </table>
     </div>
+    <h6 class="text-2xl font-semibold mb-4">Printed on: {{now()}}</h6>
+    <h6 class="text-2xl font-semibold mb-4">Printed by {{Auth::user()->name}}</h6>
 </body>
 
 </html>

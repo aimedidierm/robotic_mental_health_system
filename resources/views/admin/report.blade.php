@@ -36,25 +36,26 @@
 <body class="bg-opacity-50">
     <div class="container mx-auto p-4">
         <img src="{{'rbc.png'}}" alt="" width="400" height="200">
-        <h2 class="text-2xl font-semibold mb-4">List of all schedules payment</h2>
-
+        <center>
+            <h2 class="text-2xl font-semibold mb-4">List of all schedules payment</h2>
+        </center>
         <table style="width: 100%" class="w-full table-auto border border-collapse">
             <thead>
                 <tr>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        Date
-                    </th>
-                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        Title
+                        Doctor
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Patient
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        Doctor
+                        Mental issue
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Payment
+                    </th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
+                        Date
                     </th>
                 </tr>
             </thead>
@@ -62,21 +63,21 @@
                 @forelse ($groupedData as $doctorId => $schedules)
                 @foreach ($schedules as $schedule)
                 <tr>
-                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$schedule->date}}
-                    </th>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$schedule->title}}
+                        {{$schedule->doctor->name}}
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->patient->name}}
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$schedule->doctor->name}}
+                        {{$schedule->title}}
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->payments->amount ?? ''}} Rwf
                     </td>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
+                        {{$schedule->date}}
+                    </th>
                 </tr>
                 @endforeach
                 <tr>
@@ -92,6 +93,8 @@
             </tbody>
         </table>
         <h2 class="text-2xl font-semibold mb-4">Total income {{$income}} Rwf</h2>
+        <h6 class="text-2xl font-semibold mb-4">Printed on: {{now()}}</h6>
+        <h6 class="text-2xl font-semibold mb-4">Printed by {{Auth::user()->name}}</h6>
     </div>
 </body>
 
