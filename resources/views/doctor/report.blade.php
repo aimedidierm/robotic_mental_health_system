@@ -36,19 +36,24 @@
 <body class="bg-opacity-50">
     <div class="container mx-auto p-4">
         <img src="{{'rbc.png'}}" alt="" width="400" height="200">
-        <h2 class="text-2xl font-semibold mb-4">List of all schedules</h2>
+        <center>
+            <h2 class="text-2xl font-semibold mb-4">List of all schedules</h2>
+        </center>
 
         <table style="width: 100%" class="w-full table-auto border border-collapse">
             <thead>
                 <tr>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        Date
-                    </th>
-                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        Title
+                        Doctor
                     </th>
                     <th style="padding: 8px; border: 1px solid #0c0c0c;">
                         Patient
+                    </th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
+                        Mentor Issue
+                    </th>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
+                        Date
                     </th>
                 </tr>
             </thead>
@@ -60,21 +65,26 @@
                 @else
                 @foreach ($data as $schedule)
                 <tr>
-                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$schedule->date}}
-                    </th>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
-                        {{$schedule->title}}
+                        {{$schedule->doctor->name}}
                     </td>
                     <td style="padding: 8px; border: 1px solid #0c0c0c;">
                         {{$schedule->patient->name}}
                     </td>
+                    <td style="padding: 8px; border: 1px solid #0c0c0c;">
+                        {{$schedule->title}}
+                    </td>
+                    <th style="padding: 8px; border: 1px solid #0c0c0c;">
+                        {{$schedule->date}}
+                    </th>
                 </tr>
                 @endforeach
                 @endif
             </tbody>
         </table>
     </div>
+    <h6 class="text-2xl font-semibold mb-4">Printed on: {{now()}}</h6>
+    <h6 class="text-2xl font-semibold mb-4">Printed by {{Auth::user()->name}}</h6>
 </body>
 
 </html>

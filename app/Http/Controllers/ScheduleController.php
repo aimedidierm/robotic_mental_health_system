@@ -156,7 +156,7 @@ class ScheduleController extends Controller
             return $pdf->download('report.pdf');
         } else {
             $data = Schedule::where('doctor_id', Auth::id())->get();
-            $data->load('patient');
+            $data->load('patient', 'doctor');
             $pdf = Pdf::loadView('doctor.report', ['data' => $data]);
             return $pdf->download('report.pdf');
         }
