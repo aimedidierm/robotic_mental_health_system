@@ -21,9 +21,10 @@ class ScheduleController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'doctor') {
+            $services = Service::all();
             $data = Schedule::where('doctor_id', Auth::id())->where('payment', true)->get();
             $data->load('patient');
-            return view('doctor.schedules', ['schedules' => $data]);
+            return view('doctor.schedules', ['schedules' => $data, 'services' => $services]);
         } else if (Auth::user()->role == 'patient') {
             $data = Schedule::where('user_id', Auth::id())->where('payment', true)->get();
             $data->load('doctor');
@@ -139,11 +140,14 @@ class ScheduleController extends Controller
         //
     }
 
-    public function report()
+    public function report(Request $request)
     {
         if (Auth::user()->role == 'admin') {
             $total = Payment::sum('amount');
-            $data = Schedule::with('patient', 'doctor', 'payments')->get();
+            $data = Schedule::with('patient', 'doctor', 'payments')
+                ->where('title', $request->status)
+                ->whereYear('date', '=', $request->year)
+                ->get();
             $groupedData = $data->groupBy('doctor_id');
             $doctorIncomes = [];
             foreach ($groupedData as $doctorId => $schedules) {
@@ -155,7 +159,10 @@ class ScheduleController extends Controller
             $pdf = Pdf::loadView('admin.report', ['groupedData' => $groupedData, 'doctorIncomes' => $doctorIncomes, 'income' => $total]);
             return $pdf->download('report.pdf');
         } else {
-            $data = Schedule::where('doctor_id', Auth::id())->get();
+            $data = Schedule::where('doctor_id', Auth::id())
+                ->where('title', $request->status)
+                ->whereYear('date', '=', $request->year)
+                ->get();
             $data->load('patient', 'doctor');
             $pdf = Pdf::loadView('doctor.report', ['data' => $data]);
             return $pdf->download('report.pdf');

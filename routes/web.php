@@ -46,7 +46,7 @@ Route::group(["prefix" => "doctor", "middleware" => ["auth", "isDoctor"], "as" =
     Route::resource('/testimonies', TestimonialController::class)->only('index', 'store', 'destory');
     Route::get('/testimonies/{testimonial}', [TestimonialController::class, 'destroy']);
     Route::post('/settings', [DoctorController::class, 'update']);
-    Route::get('/report', [ScheduleController::class, 'report']);
+    Route::post('/report', [ScheduleController::class, 'report']);
 });
 
 Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => "admin."], function () {
@@ -57,6 +57,6 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "isAdmin"], "as" => 
     Route::get('/settings', [AdminController::class, 'create']);
     Route::post('/settings', [AdminController::class, 'update']);
     Route::get('/payments', [PaymentController::class, 'index']);
-    Route::get('/report', [ScheduleController::class, 'report']);
+    Route::post('/report', [ScheduleController::class, 'report']);
     Route::post('/patients', [PatientController::class, 'print']);
 });

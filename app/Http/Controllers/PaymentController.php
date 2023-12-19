@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Schedule;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,7 +19,8 @@ class PaymentController extends Controller
     {
         $data = Payment::latest()->get();
         $data->load('user');
-        return view('admin.payments', ['payments' => $data]);
+        $services = Service::all();
+        return view('admin.payments', ['payments' => $data, 'services' => $services]);
     }
 
     public function patientList()
