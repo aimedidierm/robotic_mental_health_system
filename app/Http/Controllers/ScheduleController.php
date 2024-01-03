@@ -143,10 +143,11 @@ class ScheduleController extends Controller
     public function report(Request $request)
     {
         if (Auth::user()->role == 'admin') {
-            $total = Payment::sum('amount');
+            // $total = Payment::sum('amount');
             $data = Schedule::with('patient', 'doctor', 'payments')
                 ->where('title', $request->status)
                 ->whereYear('date', '=', $request->year)
+                ->where('payment', true)
                 ->get();
             $groupedData = $data->groupBy('doctor_id');
             $doctorIncomes = [];
@@ -156,14 +157,18 @@ class ScheduleController extends Controller
                 });
                 $doctorIncomes[$doctorId] = $totalIncome;
             }
+            $data->load('patient', 'doctor', 'payments');
+            $total = $data->pluck('payments.amount')->sum();
             $pdf = Pdf::loadView('admin.report', ['groupedData' => $groupedData, 'doctorIncomes' => $doctorIncomes, 'income' => $total, 'year' => $request->year]);
             return $pdf->download('report.pdf');
         } else {
             $data = Schedule::where('doctor_id', Auth::id())
                 ->where('title', $request->status)
                 ->whereYear('date', '=', $request->year)
+                ->where('payment', true)
                 ->get();
-            $data->load('patient', 'doctor');
+            $data->load('patient', 'doctor', 'payments');
+            $total = $data->pluck('payments.amount')->sum();
             $pdf = Pdf::loadView('doctor.report', ['data' => $data, 'year' => $request->year]);
             return $pdf->download('report.pdf');
         }
