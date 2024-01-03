@@ -156,7 +156,7 @@ class ScheduleController extends Controller
                 });
                 $doctorIncomes[$doctorId] = $totalIncome;
             }
-            $pdf = Pdf::loadView('admin.report', ['groupedData' => $groupedData, 'doctorIncomes' => $doctorIncomes, 'income' => $total]);
+            $pdf = Pdf::loadView('admin.report', ['groupedData' => $groupedData, 'doctorIncomes' => $doctorIncomes, 'income' => $total, 'year' => $request->year]);
             return $pdf->download('report.pdf');
         } else {
             $data = Schedule::where('doctor_id', Auth::id())
@@ -164,7 +164,7 @@ class ScheduleController extends Controller
                 ->whereYear('date', '=', $request->year)
                 ->get();
             $data->load('patient', 'doctor');
-            $pdf = Pdf::loadView('doctor.report', ['data' => $data]);
+            $pdf = Pdf::loadView('doctor.report', ['data' => $data, 'year' => $request->year]);
             return $pdf->download('report.pdf');
         }
     }

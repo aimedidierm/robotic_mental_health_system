@@ -37,7 +37,7 @@
     <div class="container mx-auto p-4">
         <img src="{{'rbc.png'}}" alt="" width="400" height="200">
         <center>
-            <h2 class="text-2xl font-semibold mb-4">List of all schedules payment</h2>
+            <h2 class="text-2xl font-semibold mb-4">List of all schedules payment in {{$year}}</h2>
         </center>
         <table style="width: 100%" class="w-full table-auto border border-collapse">
             <thead>
